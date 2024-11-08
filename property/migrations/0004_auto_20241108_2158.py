@@ -9,14 +9,14 @@ def add_new_building(apps, schema_editor):
             building.objects.get_or_create(
                 new_building = True
                 ),
-            flat.save()
+            building.save()
             )
         if building.construction_year >= 2015
         else (
             building.objects.get_or_create(
                 new_building = False
                 ),
-            flat.save()
+            building.save()
             )
         for building in buildings.objects.all()
         ]
