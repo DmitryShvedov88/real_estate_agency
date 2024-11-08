@@ -21,12 +21,12 @@ class AuthorAdmin(admin.ModelAdmin):
         'construction_year'
         )
     list_editable = ['new_building']
-    # list_filter = (
-    #     'address',
-    #     'price',
-    #     'construction_year'
-    #     )
-  
+    list_filter = (
+        'address',
+        'price',
+        'construction_year'
+        )
+
 admin.site.register(
     Flat,
     AuthorAdmin,
