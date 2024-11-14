@@ -2,24 +2,16 @@
 
 from django.db import migrations
 
+
 def add_new_building(apps, schema_editor):
-    buildings = apps.get_model('property', 'Flat')
-    [
-        (
-            building.objects.get_or_create(
-                new_building = True
-                ),
-            building.save()
-            )
-        if building.construction_year >= 2015
-        else (
-            building.objects.get_or_create(
-                new_building = False
-                ),
-            building.save()
-            )
-        for building in buildings.objects.all()
-        ]
+    Flat = apps.get_model('property', 'Flat')
+    for flat in Flat.objects.all():
+        # objects.get_or_create():
+        if flat.construction_year >= 2015:
+            flat.new_building = True
+        else:
+            flat.new_building = False
+        flat.save()
 
 
 class Migration(migrations.Migration):
