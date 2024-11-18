@@ -10,10 +10,9 @@ class AuthorAdmin(admin.ModelAdmin):
         'address',
         'owner',
         ]
-
     readonly_fields = [
         "created_at"
-        ]
+        ]  
     list_display = (
         'address',
         'price',
@@ -27,6 +26,9 @@ class AuthorAdmin(admin.ModelAdmin):
         'new_building',
         'rooms_number',
         'has_balcony',
+        )
+    raw_id_fields = (
+        'likes',
         )
 
 class ComplaintsAdmin(admin.ModelAdmin):
