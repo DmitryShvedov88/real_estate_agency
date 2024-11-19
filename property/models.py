@@ -1,6 +1,9 @@
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
+from phonenumber_field.modelfields import PhoneNumberField
+
+
 
 class Flat(models.Model):
     owner = models.CharField('ФИО владельца', max_length=200)
@@ -62,6 +65,11 @@ class Flat(models.Model):
         verbose_name='Лайк',
         null=True,
         blank=True
+        )
+    owner_pure_phone = PhoneNumberField(
+        verbose_name="Телефон владельца",
+        blank=True,
+        null=True
         )
 
 
