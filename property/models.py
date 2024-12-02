@@ -93,10 +93,10 @@ class Owner(models.Model):
         help_text='ФИО владельца'
         )
     phone = models.CharField(
-        'Номер владельца', blank=True, max_length=20
+        'Номер владельца', null=True, max_length=20
         )
     owner_pure_phone = PhoneNumberField(
-        "Нормализованный телефон владельца", blank=True, max_length=20
+        "Нормализованный телефон владельца", blank=True, null=True, max_length=20
         )
     flats = models.ManyToManyField(
         Flat, verbose_name="Квартира, кототорая продается",
