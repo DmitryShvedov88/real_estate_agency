@@ -63,42 +63,45 @@ class Flat(models.Model):
     likes = models.ManyToManyField(
         User,
         verbose_name='Лайк',
-        null=True,
         blank=True
         )
     owner_pure_phone = PhoneNumberField(
-        verbose_name="Телефон владельца",
+        verbose_name="Нормализованный телефон владельца",
         blank=True,
         null=True
         )
 
 
-class Complaint(models.Model):
+class Complaints(models.Model):
     user = models.ForeignKey(
         User, verbose_name="Пользователь, который жалуется", on_delete=models.CASCADE,
-        null=True, blank=True, related_name="complaint"
+        null=True, blank=True, related_name="user"
         )
     flat = models.ForeignKey(
         Flat, verbose_name="Квартира, на которую жалуются", on_delete=models.CASCADE,
-        null=True, blank=True, related_name="complaint"
+        null=True, blank=True, related_name="flat"
         )
     description = models.TextField(
         null=True, blank=True, verbose_name="Текст жалобы"
         )
 
 class Owner(models.Model):
-    user = models.ForeignKey(
-        User, verbose_name="Пользователь, который жалуется", on_delete=models.CASCADE,
-        null=True, blank=True, related_name="complaints"
+    name = models.CharField(
+        'ФИО владельца',
+        max_length=200,
+        null=True,
+        help_text='ФИО владельца'
         )
-    flat = models.ForeignKey(
-        Flat, verbose_name="Квартира, на которую жалуются", on_delete=models.CASCADE,
-        null=True, blank=True, related_name="complaints"
+    phone = models.CharField(
+        'Номер владельца', blank=True, max_length=20
         )
-    description = models.TextField(
-        null=True, blank=True, verbose_name="Текст жалобы"
+    owner_pure_phone = PhoneNumberField(
+        "Нормализованный телефон владельца", blank=True, max_length=20
         )
-    
-    
+    flats = models.ManyToManyField(
+        Flat, verbose_name="Квартира, кототорая продается",
+        null=True, related_name="flats"
+    )
+
     def __str__(self):
         return f'{self.town}, {self.address} ({self.price}р.)'
