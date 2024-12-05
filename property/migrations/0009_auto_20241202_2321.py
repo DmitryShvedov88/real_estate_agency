@@ -33,14 +33,14 @@ class Migration(migrations.Migration):
             name='owner_pure_phone',
             field=phonenumber_field.modelfields.PhoneNumberField(blank=True, max_length=128, null=True, region=None, verbose_name='Нормализованный телефон владельца'),
         ),
-        # migrations.CreateModel(
-        #     name='Owner',
-        #     fields=[
-        #         ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-        #         ('name', models.CharField(help_text='ФИО владельца', max_length=200, null=True, verbose_name='ФИО владельца')),
-        #         ('phone', models.CharField(max_length=20, null=True, verbose_name='Номер владельца')),
-        #         ('owner_pure_phone', phonenumber_field.modelfields.PhoneNumberField(blank=True, max_length=20, null=True, region=None, verbose_name='Нормализованный телефон владельца')),
-        #         ('flats', models.ManyToManyField(null=True, related_name='flats', to='property.Flat', verbose_name='Квартира, кототорая продается')),
-        #     ],
-        # ),
+        migrations.CreateModel(
+            name='Owner',
+            fields=[
+                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('name', models.CharField(help_text='ФИО владельца', max_length=200, null=True, verbose_name='ФИО владельца')),
+                ('phone', models.CharField(max_length=20, null=True, verbose_name='Номер владельца')),
+                ('owner_pure_phone', phonenumber_field.modelfields.PhoneNumberField(blank=True, max_length=20, null=True, region=None, verbose_name='Нормализованный телефон владельца')),
+                ('flats', models.ManyToManyField(null=True, related_name='flats', to='property.Flat', verbose_name='Квартира, кототорая продается')),
+            ],
+        ),
     ]
