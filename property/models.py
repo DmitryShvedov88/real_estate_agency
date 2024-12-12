@@ -10,22 +10,19 @@ class Flat(models.Model):
     owners_phonenumber = models.CharField('Номер владельца', max_length=20)
     created_at = models.DateTimeField(
         'Когда создано объявление',
-        default=timezone.now,
-        db_index=True)
+        default=timezone.now, db_index=True
+        )
 
     description = models.TextField('Текст объявления', blank=True)
     price = models.IntegerField('Цена квартиры', db_index=True)
 
     town = models.CharField(
         'Город, где находится квартира',
-        max_length=50,
-        db_index=True
+        max_length=50, db_index=True
         )
     town_district = models.CharField(
         'Район города, где находится квартира',
-        max_length=50,
-        blank=True,
-        help_text='Чертаново Южное'
+        max_length=50, blank=True, help_text='Чертаново Южное'
         )
     address = models.TextField(
         'Адрес квартиры',
@@ -41,9 +38,7 @@ class Flat(models.Model):
         )
     living_area = models.IntegerField(
         'количество жилых кв.метров',
-        null=True,
-        blank=True,
-        db_index=True
+        null=True, blank=True, db_index=True
         )
     has_balcony = models.NullBooleanField('Наличие балкона', db_index=True)
     active = models.BooleanField(
@@ -52,13 +47,11 @@ class Flat(models.Model):
         )
     construction_year = models.IntegerField(
         'Год постройки здания',
-        null=True,
-        blank=True,
+        null=True, blank=True,
     )
     new_building = models.BooleanField(
         'Новостройка',
-        null=True,
-        blank=True
+        null=True, blank=True
         )
     likes = models.ManyToManyField(
         User,
@@ -67,14 +60,18 @@ class Flat(models.Model):
         )
     owner_pure_phone = PhoneNumberField(
         verbose_name="Нормализованный телефон владельца",
-        blank=True,
-        null=True
+        blank=True, null=True
         )
+
+    def __str__(self):
+        return f'{self.town}, {self.address} ({self.price}р.)'
 
 
 class Complaints(models.Model):
     user = models.ForeignKey(
-        User, verbose_name="Пользователь, который жалуется", on_delete=models.CASCADE,
+        User,
+        verbose_name="Пользователь, который жалуется",
+        on_delete=models.CASCADE,
         null=True, blank=True, related_name="user"
         )
     flat = models.ForeignKey(
@@ -88,15 +85,15 @@ class Complaints(models.Model):
 class Owner(models.Model):
     name = models.CharField(
         'ФИО владельца',
-        max_length=200,
-        null=True,
-        help_text='ФИО владельца'
+        max_length=200, null=True, help_text='ФИО владельца', db_index=True
         )
     phone = models.CharField(
-        'Номер владельца', null=True, max_length=20
+        'Номер владельца',
+        null=True, max_length=20
         )
     owner_pure_phone = PhoneNumberField(
-        "Нормализованный телефон владельца", blank=True, null=True, max_length=20
+        "Нормализованный телефон владельца",
+        blank=True, null=True, max_length=20
         )
     flats = models.ManyToManyField(
         Flat, verbose_name="Квартира, кототорая продается",
@@ -104,4 +101,4 @@ class Owner(models.Model):
     )
 
     def __str__(self):
-        return f'{self.town}, {self.address} ({self.price}р.)'
+        return self.name
