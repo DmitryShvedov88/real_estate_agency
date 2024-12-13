@@ -3,8 +3,11 @@ from .models import Flat, Complaints, Owner
 
 
 class FlatsInline(admin.TabularInline):
+    '''FlatsInlineOwner'''
+
     model = Owner.flats.through
     raw_id_fields = ['owner']
+
 
 class AuthorAdmin(admin.ModelAdmin):
     '''Admin search'''
@@ -12,11 +15,11 @@ class AuthorAdmin(admin.ModelAdmin):
     search_fields = [
         'town',
         'address',
-        'owner',
+        'owner'
         ]
     readonly_fields = [
         "created_at"
-        ]  
+        ]
     list_display = (
         'address',
         'price',
@@ -29,32 +32,37 @@ class AuthorAdmin(admin.ModelAdmin):
     list_filter = (
         'new_building',
         'rooms_number',
-        'has_balcony',
+        'has_balcony'
         )
     raw_id_fields = (
         'likes',
         )
-    inlines = [FlatsInline,]
+    inlines = [FlatsInline]
     exclude = ['flats']
 
+
 class ComplaintsAdmin(admin.ModelAdmin):
+    '''Complaints veiw'''
     raw_id_fields = ('user', 'flat')
 
+
 class OwnerAdmin(admin.ModelAdmin):
+    '''Owner veiw'''
     list_display = ('name', 'phone', 'owner_pure_phone')
-    raw_id_fields = ('flats',)
+    raw_id_fields = ('flats')
+
 
 admin.site.register(
     Flat,
-    AuthorAdmin,
+    AuthorAdmin
     )
 
 admin.site.register(
     Complaints,
-    ComplaintsAdmin,
+    ComplaintsAdmin
     )
 
 admin.site.register(
     Owner,
-    OwnerAdmin,
+    OwnerAdmin
     )

@@ -4,18 +4,16 @@ from django.contrib.auth.models import User
 from phonenumber_field.modelfields import PhoneNumberField
 
 
-
 class Flat(models.Model):
+    '''Class Flat'''
     owner = models.CharField('ФИО владельца', max_length=200)
     owners_phonenumber = models.CharField('Номер владельца', max_length=20)
     created_at = models.DateTimeField(
         'Когда создано объявление',
         default=timezone.now, db_index=True
         )
-
     description = models.TextField('Текст объявления', blank=True)
     price = models.IntegerField('Цена квартиры', db_index=True)
-
     town = models.CharField(
         'Город, где находится квартира',
         max_length=50, db_index=True
@@ -48,7 +46,7 @@ class Flat(models.Model):
     construction_year = models.IntegerField(
         'Год постройки здания',
         null=True, blank=True,
-    )
+        )
     new_building = models.BooleanField(
         'Новостройка',
         null=True, blank=True
@@ -68,6 +66,7 @@ class Flat(models.Model):
 
 
 class Complaints(models.Model):
+    '''Complaints class'''
     user = models.ForeignKey(
         User,
         verbose_name="Пользователь, который жалуется",
@@ -83,6 +82,7 @@ class Complaints(models.Model):
         )
 
 class Owner(models.Model):
+    '''Owner class'''
     name = models.CharField(
         'ФИО владельца',
         max_length=200, null=True, help_text='ФИО владельца', db_index=True
@@ -98,7 +98,7 @@ class Owner(models.Model):
     flats = models.ManyToManyField(
         Flat, verbose_name="Квартира, кототорая продается",
         null=True, related_name="flats"
-    )
+        )
 
     def __str__(self):
-        return self.name
+        return f"{self.name} {self.owner_pure_phone}"
