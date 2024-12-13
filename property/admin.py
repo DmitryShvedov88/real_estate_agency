@@ -49,7 +49,7 @@ class ComplaintsAdmin(admin.ModelAdmin):
 class OwnerAdmin(admin.ModelAdmin):
     '''Owner veiw'''
     list_display = ('name', 'phone', 'owner_pure_phone')
-    raw_id_fields = ('flats')
+    raw_id_fields = ('flats',)
 
 
 admin.site.register(
