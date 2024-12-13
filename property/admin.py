@@ -2,6 +2,10 @@ from django.contrib import admin
 from .models import Flat, Complaints, Owner
 
 
+class FlatsInline(admin.TabularInline):
+    model = Owner.flats.through
+    raw_id_fields = ['owner']
+
 class AuthorAdmin(admin.ModelAdmin):
     '''Admin search'''
 
@@ -30,6 +34,8 @@ class AuthorAdmin(admin.ModelAdmin):
     raw_id_fields = (
         'likes',
         )
+    inlines = [FlatsInline,]
+    exclude = ['flats']
 
 class ComplaintsAdmin(admin.ModelAdmin):
     raw_id_fields = ('user', 'flat')
