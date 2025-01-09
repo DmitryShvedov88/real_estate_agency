@@ -54,10 +54,6 @@ class Flat(models.Model):
         verbose_name='Лайк',
         blank=True
         )
-    owner_pure_phone = PhoneNumberField(
-        verbose_name="Нормализованный телефон владельца",
-        blank=True, null=True
-        )
 
     def __str__(self):
         return f'{self.town}, {self.address} ({self.price}р.)'
@@ -78,6 +74,7 @@ class Complaints(models.Model):
     description = models.TextField(
         null=True, blank=True, verbose_name="Текст жалобы"
         )
+
 
 class Owner(models.Model):
     '''Owner class'''
