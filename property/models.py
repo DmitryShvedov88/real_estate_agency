@@ -52,7 +52,7 @@ class Flat(models.Model):
     likes = models.ManyToManyField(
         User,
         verbose_name='Лайк',
-        blank=True
+        blank=True, related_name="likes"
         )
 
     def __str__(self):
