@@ -75,6 +75,9 @@ class Complaints(models.Model):
         null=True, blank=True, verbose_name="Текст жалобы"
         )
 
+    def __str__(self):
+        return f"{self.user} {self.flat}"
+
 
 class Owner(models.Model):
     '''Owner class'''
