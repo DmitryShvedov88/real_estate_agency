@@ -61,7 +61,7 @@ class Flat(models.Model):
 
 class Complaints(models.Model):
     '''Complaints class'''
-    user = models.ForeignKey(
+    author = models.ForeignKey(
         User,
         verbose_name="Пользователь, который жалуется",
         on_delete=models.CASCADE,
@@ -92,7 +92,7 @@ class Owner(models.Model):
         )
     flats = models.ManyToManyField(
         Flat, verbose_name="Квартира, кототорая продается",
-        null=True, related_name="flats"
+        null=True, related_name="flat"
         )
 
     def __str__(self):
