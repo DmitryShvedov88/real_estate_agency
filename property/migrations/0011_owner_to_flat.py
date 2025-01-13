@@ -6,14 +6,14 @@ def owner_to_flat(apps, schema_editor):
     Flat = apps.get_model('property','Flat')
     Owner = apps.get_model('property','Owner')
 
-    for owner in Owner.objects.all().iterator():
+    for owner in Owner.objects.iterator():
         owner_flats = Flat.objects.filter(owner=owner.name)
         owner.flats.set(owner_flats)
         owner.save()
 
 def move_backwards(apps, schema_editor):
     Owner = apps.get_model('property', 'Owner')
-    for owner in Owner.objects.all():
+    for owner in Owner.objects.iterator():
         owner.flats = []
         owner.save()
 

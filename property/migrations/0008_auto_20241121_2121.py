@@ -5,7 +5,7 @@ from django.db import migrations
 
 def normalize_numbers(apps, schema_editor):
     Flat = apps.get_model('property', 'Flat')
-    for flat in Flat.objects.all():
+    for flat in Flat.objects.iterator():
         normal_number = phonenumbers.parse(flat.owners_phonenumber, "RU")
         if not phonenumbers.is_valid_number(normal_number):
             normal_number = None
@@ -15,8 +15,8 @@ def normalize_numbers(apps, schema_editor):
 
 def move_backward(apps, schema_editor):
     Flat = apps.get_model('property', 'Flat')
-    for flat in Flat.objects.all():
-        flat.owner_pure_phone = ''
+    for flat in Flat.objects.iterator():
+        flat.owner_pure_phone = None
         flat.save()
 
 
