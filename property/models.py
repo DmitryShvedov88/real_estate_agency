@@ -89,7 +89,7 @@ class Owner(models.Model):
         'Номер владельца',
         null=True, max_length=20
         )
-    owner_pure_phone = PhoneNumberField(
+    pure_phone = PhoneNumberField(
         "Нормализованный телефон владельца",
         blank=True, null=True, max_length=20
         )
@@ -99,4 +99,4 @@ class Owner(models.Model):
         )
 
     def __str__(self):
-        return f"{self.name} {self.owner_pure_phone}"
+        return f"{self.name} {self.pure_phone}"

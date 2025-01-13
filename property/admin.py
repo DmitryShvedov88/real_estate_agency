@@ -51,5 +51,5 @@ class ComplaintsAdmin(admin.ModelAdmin):
 @admin.register(Owner)
 class OwnerAdmin(admin.ModelAdmin):
     '''Owner veiw'''
-    list_display = ('name', 'phone', 'owner_pure_phone')
+    list_display = ('name', 'phone', 'pure_phone')
     raw_id_fields = ('flats',)
