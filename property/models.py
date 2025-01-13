@@ -52,7 +52,7 @@ class Flat(models.Model):
     likes = models.ManyToManyField(
         User,
         verbose_name='Лайк',
-        blank=True, related_name="likes"
+        blank=True, related_name="flats"
         )
 
     def __str__(self):
@@ -65,11 +65,11 @@ class Complaints(models.Model):
         User,
         verbose_name="Пользователь, который жалуется",
         on_delete=models.CASCADE,
-        null=True, blank=True, related_name="user"
+        null=True, blank=True, related_name="сomplaints"
         )
     flat = models.ForeignKey(
         Flat, verbose_name="Квартира, на которую жалуются", on_delete=models.CASCADE,
-        null=True, blank=True, related_name="flat"
+        null=True, blank=True, related_name="complaints"
         )
     description = models.TextField(
         null=True, blank=True, verbose_name="Текст жалобы"
@@ -93,9 +93,9 @@ class Owner(models.Model):
         "Нормализованный телефон владельца",
         blank=True, null=True, max_length=20
         )
-    flats = models.ManyToManyField(
+    flat = models.ManyToManyField(
         Flat, verbose_name="Квартира, кототорая продается",
-        null=True, related_name="owner"
+        null=True, related_name="flats"
         )
 
     def __str__(self):
